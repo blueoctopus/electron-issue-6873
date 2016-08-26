@@ -1,0 +1,34 @@
+<html>
+<head>
+  <title>Electron</title>
+  <style>
+    body {
+      padding: 10px;
+      background-color: #ccc;
+    }
+    webview {
+      width: 100%;
+      height: 380px;
+    }
+  </style>
+</head>
+<body>
+  <p>How to reproduce Electron issue #6873 (happens on OS X using a trackpad):</p>
+  <ol>
+    <li>Click View -> Toggle Developer Tools and watch the Console output</li>
+    <li>Using the trackpad, perform a scroll gesture on the <em>webview</em> or <em>scroll-touch area</em></li>
+    <li>My tests on Electron v1.3.4 show that the events are reported only half of the time on these areas, while Electron v1.3.2 works as expected</li>
+    <li>On the <em>BrowserWindow</em> area everything works as expected on any version</li>
+  </ol>
+  <p>BrowserWindow</p>
+  <script>
+    const path = require('path')
+    const webview = document.createElement('webview');
+
+    webview.setAttribute('src', 'file://' + path.join(__dirname, '/webview.html'));
+    webview.setAttribute('autosize', 'on');
+
+    document.body.appendChild(webview);
+  </script>
+</body>
+</html>
